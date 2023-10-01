@@ -3,7 +3,7 @@ const HttpStatusCodes = require("http-status-codes");
 const Category = require("../models/category.model");
 
 class CategoriesController {
-  getAll = (req, res) => {
+  list = (req, res) => {
     Category.find()
       .then((docs) => res.status(HttpStatusCodes.StatusCodes.OK).send(docs))
       .catch((err) =>
@@ -13,10 +13,8 @@ class CategoriesController {
       );
   };
 
-  add = (req, res) => {
-    const body = req.body;
-
-    Category.create(body)
+  create = (req, res) => {
+    Category.create(req.body)
       .then((doc) => res.status(HttpStatusCodes.StatusCodes.CREATED).send(doc))
       .catch((err) =>
         res
